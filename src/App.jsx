@@ -503,6 +503,29 @@ export default function ShubbakCoffee() {
             </div>
           </Reveal>
 
+          {/* Navigation buttons */}
+          <Reveal delay={0.5} direction="up">
+            <div style={{
+              display: "flex", gap: 14, justifyContent: "center",
+              position: "relative", zIndex: 2, marginBottom: 20,
+            }}>
+              <button onClick={() => document.getElementById("menu")?.scrollIntoView({ behavior: "smooth" })} style={{
+                background: `${C.cream}0a`, border: `1px solid ${C.gold}28`,
+                borderRadius: 50, padding: "10px 28px",
+                color: C.creamDark, fontSize: 14, fontWeight: 500,
+                cursor: "pointer", backdropFilter: "blur(8px)",
+                fontFamily: "'Tajawal', sans-serif",
+              }}>القائمة</button>
+              <button onClick={() => document.getElementById("story")?.scrollIntoView({ behavior: "smooth" })} style={{
+                background: `${C.cream}0a`, border: `1px solid ${C.gold}28`,
+                borderRadius: 50, padding: "10px 28px",
+                color: C.creamDark, fontSize: 14, fontWeight: 500,
+                cursor: "pointer", backdropFilter: "blur(8px)",
+                fontFamily: "'Tajawal', sans-serif",
+              }}>حكايتنا</button>
+            </div>
+          </Reveal>
+
           {/* Bean logo below */}
           <Reveal delay={0.6} direction="scale">
             <div style={{
@@ -518,7 +541,7 @@ export default function ShubbakCoffee() {
           <Reveal delay={0.8}>
             <h1 style={{
               fontFamily: "'Reem Kufi', serif",
-              fontSize: "clamp(24px, 5vw, 48px)",
+              fontSize: "clamp(30px, 6vw, 52px)",
               color: C.cream, fontWeight: 700,
               textAlign: "center", lineHeight: 1.5,
               margin: "0 0 6px",
@@ -543,7 +566,7 @@ export default function ShubbakCoffee() {
 
           <Reveal delay={1.05}>
             <p style={{
-              color: C.creamDark, fontSize: "clamp(13px, 2.2vw, 16px)",
+              color: C.creamDark, fontSize: "clamp(15px, 2.5vw, 18px)",
               fontWeight: 300, maxWidth: 380,
               margin: "0 auto 26px", lineHeight: 2.2,
               textAlign: "center", position: "relative", zIndex: 2,
@@ -572,7 +595,7 @@ export default function ShubbakCoffee() {
                 animation: "pulseGlow 2s infinite",
               }} />
               <span style={{
-                color: C.cream, fontSize: 15, fontWeight: 600,
+                color: C.cream, fontSize: 17, fontWeight: 600,
                 fontFamily: "'Reem Kufi', sans-serif",
               }}>الافتتاح قريبًا جدًا</span>
             </div>
@@ -583,7 +606,7 @@ export default function ShubbakCoffee() {
             display: "flex", flexDirection: "column", alignItems: "center", gap: 5,
             opacity: 0.25, zIndex: 2,
           }}>
-            <span style={{ color: C.cream, fontSize: 10 }}>اسكرول</span>
+            <span style={{ color: C.cream, fontSize: 11 }}>اسكرول</span>
             <div style={{
               width: 1, height: 32,
               background: `linear-gradient(180deg, ${C.gold}88, transparent)`,
@@ -604,29 +627,29 @@ export default function ShubbakCoffee() {
         }}>
           <MashrabiyaBand color={C.copper} />
           <div style={{
-            maxWidth: 920, margin: "0 auto",
-            display: "flex", flexWrap: "wrap",
+            maxWidth: 500, margin: "0 auto",
+            display: "grid", gridTemplateColumns: "1fr 1fr",
             gap: 16, justifyContent: "center",
           }}>
             {[
               { ic: "☕", t: "مختصة", d: "حبوب مختارة من أجود المزارع", c: C.copper },
               { ic: "⚡", t: "على السريع", d: "قهوتك جاهزة بسرعة وإتقان", c: C.gold },
-              { ic: "🏘️", t: "من حيّكم", d: "في قلب حي القصيري العريق", c: C.teal },
               { ic: "✨", t: "نوتات واضحة", d: "كل كوب بنكهة مميزة ومختلفة", c: C.goldLight },
+              { ic: "🏘️", t: "من حيّكم", d: "في قلب حي القصيري العريق", c: C.teal },
             ].map((f, i) => (
               <Reveal key={i} delay={i * 0.12}>
                 <div style={{
-                  width: 185, padding: "28px 16px",
+                  padding: "32px 20px", height: "100%",
                   background: `${f.c}08`, border: `1px solid ${f.c}12`,
                   borderRadius: 16, textAlign: "center",
                 }}>
-                  <div style={{ fontSize: 28, marginBottom: 10 }}>{f.ic}</div>
+                  <div style={{ fontSize: 32, marginBottom: 10 }}>{f.ic}</div>
                   <div style={{
                     fontFamily: "'Reem Kufi', serif",
-                    color: f.c, fontSize: 14, fontWeight: 600, marginBottom: 5,
+                    color: f.c, fontSize: 16, fontWeight: 600, marginBottom: 5,
                   }}>{f.t}</div>
                   <div style={{
-                    color: C.creamDark, fontSize: 11, fontWeight: 300, lineHeight: 1.7, opacity: 0.65,
+                    color: C.creamDark, fontSize: 13, fontWeight: 300, lineHeight: 1.7, opacity: 0.65,
                   }}>{f.d}</div>
                 </div>
               </Reveal>
@@ -635,7 +658,7 @@ export default function ShubbakCoffee() {
         </section>
 
         {/* ━━━━ STORY ━━━━ */}
-        <section style={{
+        <section id="story" style={{
           padding: "90px 20px",
           background: `linear-gradient(180deg, ${C.blackSoft}, ${C.brownDeep}66, ${C.blackSoft})`,
           position: "relative", overflow: "hidden",
@@ -651,12 +674,12 @@ export default function ShubbakCoffee() {
             <Reveal>
               <div style={{ textAlign: "center", marginBottom: 52 }}>
                 <div style={{
-                  fontSize: 11, color: C.gold, letterSpacing: 5, fontWeight: 500,
+                  fontSize: 12, color: C.gold, letterSpacing: 5, fontWeight: 500,
                   marginBottom: 14, fontFamily: "'Amiri', serif",
                 }}>OUR STORY</div>
                 <h2 style={{
                   fontFamily: "'Aref Ruqaa', serif",
-                  fontSize: "clamp(28px, 5vw, 44px)",
+                  fontSize: "clamp(32px, 6vw, 48px)",
                   color: C.cream, fontWeight: 700, marginBottom: 12,
                 }}>حكاية شُبّاك</h2>
                 <div style={{
@@ -693,10 +716,10 @@ export default function ShubbakCoffee() {
                   <div style={{ flex: 1, minWidth: 220 }}>
                     <h3 style={{
                       fontFamily: "'Reem Kufi', serif",
-                      color: C.cream, fontSize: 18, fontWeight: 600, marginBottom: 8,
+                      color: C.cream, fontSize: 20, fontWeight: 600, marginBottom: 8,
                     }}>{s.t}</h3>
                     <p style={{
-                      color: C.creamDark, fontSize: 13, lineHeight: 2.2, fontWeight: 300, opacity: 0.75,
+                      color: C.creamDark, fontSize: 15, lineHeight: 2.2, fontWeight: 300, opacity: 0.75,
                     }}>{s.p}</p>
                   </div>
                 </div>
@@ -736,7 +759,7 @@ export default function ShubbakCoffee() {
         </section>
 
         {/* ━━━━ MENU ━━━━ */}
-        <section style={{
+        <section id="menu" style={{
           padding: "90px 20px",
           background: `linear-gradient(180deg, ${C.blackSoft}, ${C.copperDeep}14, ${C.blackSoft})`,
           position: "relative",
@@ -748,12 +771,12 @@ export default function ShubbakCoffee() {
             <Reveal>
               <div style={{ textAlign: "center", marginBottom: 46 }}>
                 <div style={{
-                  fontSize: 11, color: C.copperLight, letterSpacing: 5, fontWeight: 500,
+                  fontSize: 12, color: C.copperLight, letterSpacing: 5, fontWeight: 500,
                   marginBottom: 14, fontFamily: "'Amiri', serif",
                 }}>— Menu —</div>
                 <h2 style={{
                   fontFamily: "'Aref Ruqaa', serif",
-                  fontSize: "clamp(28px, 5vw, 44px)",
+                  fontSize: "clamp(32px, 6vw, 48px)",
                   color: C.cream, fontWeight: 700, marginBottom: 12,
                 }}>
                   شُبّاك قهوة
@@ -763,7 +786,7 @@ export default function ShubbakCoffee() {
                   background: `linear-gradient(90deg, ${C.copper}, ${C.gold})`,
                   margin: "0 auto 12px", borderRadius: 1,
                 }} />
-                <p style={{ color: C.creamDark, fontSize: 12, fontWeight: 300, opacity: 0.6 }}>
+                <p style={{ color: C.creamDark, fontSize: 14, fontWeight: 300, opacity: 0.6 }}>
                   قهوة مختصة «على السريع» · مخبوزات طازجة
                 </p>
               </div>
@@ -783,8 +806,8 @@ export default function ShubbakCoffee() {
                         : `${C.cream}08`,
                       color: activeMenu === i ? C.creamLight : C.creamDark,
                       border: `1px solid ${activeMenu === i ? C.copper : C.cream + '10'}`,
-                      borderRadius: 50, padding: "9px 20px",
-                      fontSize: 13, fontWeight: activeMenu === i ? 600 : 400,
+                      borderRadius: 50, padding: "12px 24px",
+                      fontSize: 15, fontWeight: activeMenu === i ? 600 : 400,
                       cursor: "pointer", fontFamily: "'Tajawal', sans-serif",
                       transition: "all 0.4s",
                       boxShadow: activeMenu === i ? `0 4px 20px ${C.copper}30` : "none",
@@ -802,7 +825,7 @@ export default function ShubbakCoffee() {
                 transition: "max-height 0.6s cubic-bezier(0.4,0,0.2,1)",
               }}>
                 <div style={{
-                  fontSize: 10, color: C.copperLight, letterSpacing: 3,
+                  fontSize: 12, color: C.copperLight, letterSpacing: 3,
                   textAlign: "center", marginBottom: 14, fontFamily: "'Amiri', serif",
                 }}>{cat.catEn}</div>
                 <div style={{
@@ -814,21 +837,21 @@ export default function ShubbakCoffee() {
                     <div key={idx} style={{
                       background: `linear-gradient(160deg, ${C.cream}0a, ${C.cream}03)`,
                       border: `1px solid ${C.cream}0a`,
-                      borderRadius: 16, padding: "24px 14px",
+                      borderRadius: 16, padding: "28px 18px",
                       textAlign: "center",
                       animation: activeMenu === ci ? `slideItem 0.5s ease ${idx * 0.08}s both` : "none",
                     }}>
-                      <div style={{ fontSize: 28, marginBottom: 10 }}>{item.ic}</div>
+                      <div style={{ fontSize: 32, marginBottom: 10 }}>{item.ic}</div>
                       <div style={{
                         fontFamily: "'Reem Kufi', serif",
-                        color: C.cream, fontSize: 14, fontWeight: 600, marginBottom: 2,
+                        color: C.cream, fontSize: 16, fontWeight: 600, marginBottom: 2,
                       }}>{item.n}</div>
                       <div style={{
-                        color: C.copperLight, fontSize: 9.5,
+                        color: C.copperLight, fontSize: 11,
                         letterSpacing: 1, fontWeight: 300, marginBottom: 7,
                       }}>{item.e}</div>
                       <div style={{
-                        color: C.creamDark, fontSize: 11,
+                        color: C.creamDark, fontSize: 13,
                         lineHeight: 1.7, fontWeight: 300, opacity: 0.65,
                       }}>{item.d}</div>
                     </div>
@@ -867,14 +890,14 @@ export default function ShubbakCoffee() {
           <Reveal>
             <div style={{
               fontFamily: "'Aref Ruqaa', serif",
-              fontSize: "clamp(26px, 5vw, 42px)",
+              fontSize: "clamp(30px, 6vw, 46px)",
               color: C.cream, lineHeight: 1.6, marginBottom: 14,
               position: "relative", zIndex: 2,
             }}>اقتربت ساعة الشباك</div>
           </Reveal>
           <Reveal delay={0.15}>
             <p style={{
-              color: C.creamDark, fontSize: 14, fontWeight: 300, lineHeight: 2,
+              color: C.creamDark, fontSize: 16, fontWeight: 300, lineHeight: 2,
               maxWidth: 380, margin: "0 auto 22px",
               position: "relative", zIndex: 2, opacity: 0.75,
             }}>
@@ -885,7 +908,7 @@ export default function ShubbakCoffee() {
           <Reveal delay={0.3}>
             <div style={{
               fontFamily: "'Reem Kufi', serif",
-              fontSize: "clamp(28px, 6vw, 50px)",
+              fontSize: "clamp(32px, 7vw, 54px)",
               marginBottom: 28, position: "relative", zIndex: 2,
               background: `linear-gradient(90deg, ${C.gold}, ${C.goldPale}, ${C.gold})`,
               backgroundSize: "200% auto",
@@ -938,7 +961,7 @@ export default function ShubbakCoffee() {
                   background: `linear-gradient(135deg, ${C.copper}, ${C.copperDark})`,
                   color: C.cream, padding: "13px 32px",
                   borderRadius: 50, textDecoration: "none",
-                  fontSize: 13, fontWeight: 500,
+                  fontSize: 15, fontWeight: 500,
                   boxShadow: `0 6px 28px ${C.copper}40`,
                   marginBottom: 18,
                 }}>
@@ -952,7 +975,7 @@ export default function ShubbakCoffee() {
             <Reveal delay={0.15}>
               <div style={{
                 display: "flex", alignItems: "center", justifyContent: "center", gap: 6,
-                color: C.teal, fontSize: 11, fontWeight: 300, marginBottom: 24,
+                color: C.teal, fontSize: 13, fontWeight: 300, marginBottom: 24,
               }}>
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" />
@@ -965,7 +988,7 @@ export default function ShubbakCoffee() {
               background: `linear-gradient(90deg, transparent, ${C.cream}10, transparent)`,
               marginBottom: 18,
             }} />
-            <div style={{ color: C.creamDark, fontSize: 10, opacity: 0.25, fontWeight: 300 }}>
+            <div style={{ color: C.creamDark, fontSize: 11, opacity: 0.25, fontWeight: 300 }}>
               شُبّاك كوفي © ٢٠٢٦ · جميع الحقوق محفوظة
             </div>
           </div>
