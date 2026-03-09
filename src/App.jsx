@@ -601,18 +601,6 @@ export default function ShubbakCoffee() {
             </div>
           </Reveal>
 
-          <div style={{
-            position: "absolute", bottom: 22,
-            display: "flex", flexDirection: "column", alignItems: "center", gap: 5,
-            opacity: 0.25, zIndex: 2,
-          }}>
-            <span style={{ color: C.cream, fontSize: 11 }}>اسكرول</span>
-            <div style={{
-              width: 1, height: 32,
-              background: `linear-gradient(180deg, ${C.gold}88, transparent)`,
-              animation: "breathe 2.5s ease-in-out infinite",
-            }} />
-          </div>
 
           <div style={{ position: "absolute", bottom: 0, left: 0, right: 0 }}>
             <MashrabiyaPattern color={C.copper} opacity={0.04} />
