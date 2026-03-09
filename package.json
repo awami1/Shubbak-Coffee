@@ -1,0 +1,20 @@
+{
+  "name": "shubbak-coffee",
+  "private": true,
+  "version": "1.0.0",
+  "description": "شُبّاك كوفي — Shubbak Coffee Pre-Launch Website",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^6.0.0"
+  }
+}
