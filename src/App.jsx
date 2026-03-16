@@ -1,26 +1,85 @@
 import { useState, useEffect, useRef } from "react";
 
-const C = {
-  copper: "#B5722C",
-  copperLight: "#CC8B45",
-  copperDark: "#8B5A1E",
-  copperDeep: "#6B4415",
-  brown: "#7A5C3E",
-  brownDark: "#4A3520",
-  brownDeep: "#2E1E10",
-  cream: "#F0DCC8",
-  creamLight: "#FAF3EB",
-  creamWarm: "#E8CDAE",
-  creamDark: "#D4B896",
-  gold: "#D4A043",
-  goldLight: "#E8C06A",
-  goldPale: "#F0D48A",
-  goldGlow: "#FFD98E",
-  teal: "#2A9D8F",
-  tealDark: "#1E7A6F",
-  black: "#1A1410",
-  blackWarm: "#231B14",
-  blackSoft: "#2C221A",
+const DARK = {
+  copper: "#B5722C", copperLight: "#CC8B45", copperDark: "#8B5A1E", copperDeep: "#6B4415",
+  brown: "#7A5C3E", brownDark: "#4A3520", brownDeep: "#2E1E10",
+  cream: "#F0DCC8", creamLight: "#FAF3EB", creamWarm: "#E8CDAE", creamDark: "#D4B896",
+  gold: "#D4A043", goldLight: "#E8C06A", goldPale: "#F0D48A", goldGlow: "#FFD98E",
+  teal: "#2A9D8F", tealDark: "#1E7A6F",
+  black: "#1A1410", blackWarm: "#231B14", blackSoft: "#2C221A",
+  // Theme-specific
+  bg: "#1A1410", bgSoft: "#231B14", bgMid: "#2C221A",
+  text: "#F0DCC8", textMid: "#D4B896", textLight: "#A8896C",
+  cardBg: "rgba(240,220,200,0.04)", cardBorder: "rgba(240,220,200,0.08)",
+  signBg: "linear-gradient(180deg, #2C221Aee, #231B14ee, #2E1E10dd)",
+  signBorder: "rgba(181,114,44,0.13)",
+  signShadow: "0 0 60px #FFD98E22, 0 0 120px #FFD98E11, 0 20px 60px rgba(0,0,0,0.5), inset 0 0 80px #FFD98E05",
+  signTextColor: "#FAF3EB",
+  signTextShadow: "0 0 20px #FFD98E66, 0 0 40px #FFD98E33, 0 0 80px #FFD98E18, 0 2px 4px rgba(0,0,0,0.3)",
+  signEnColor: "#D4B896",
+  signEnShadow: "0 0 15px #FFD98E33",
+  signHasGlow: true,
+  navBg: "#231B14f2",
+  navNameColor: "#FAF3EB",
+  navNameShadow: "0 0 12px #FFD98E33",
+  ctaBg: "linear-gradient(135deg, rgba(181,114,44,0.16), rgba(139,90,30,0.22))",
+  ctaBorder: "rgba(212,160,67,0.16)",
+  ctaShadow: "0 8px 40px rgba(181,114,44,0.09)",
+  ctaTextColor: "#F0DCC8",
+  ctaDotColor: "#E8C06A",
+  footerBg: "#2E1E10",
+  footerSignBg: "rgba(44,34,26,0.8)",
+  footerSignBorder: "rgba(181,114,44,0.09)",
+  footerSignShadow: "0 0 30px #FFD98E0c",
+  footerSignTextShadow: "0 0 12px #FFD98E33",
+  footerTextColor: "#F0DCC8",
+  footerLinkBg: "linear-gradient(135deg, #B5722C, #8B5A1E)",
+  footerLinkBorder: "none",
+  footerLinkShadow: "0 6px 28px rgba(181,114,44,0.25)",
+  beanLogoColor: "rgba(232,192,106,0.8)",
+  beanGlow: true,
+  mode: "dark",
+};
+
+const LIGHT = {
+  copper: "#B5722C", copperLight: "#CC8B45", copperDark: "#8B5A1E", copperDeep: "#6B4415",
+  brown: "#7A5C3E", brownDark: "#4A3520", brownDeep: "#2E1E10",
+  cream: "#F0DCC8", creamLight: "#FAF3EB", creamWarm: "#E8CDAE", creamDark: "#D4B896",
+  gold: "#D4A043", goldLight: "#B8922E", goldPale: "#F0D48A", goldGlow: "#D4A043",
+  teal: "#1E7A6F", tealDark: "#1E7A6F",
+  black: "#1A1410", blackWarm: "#231B14", blackSoft: "#2C221A",
+  // Theme-specific
+  bg: "#FAF3EB", bgSoft: "#F5EBDD", bgMid: "#EFE0CE",
+  text: "#3D2A18", textMid: "#6B5240", textLight: "#9C8672",
+  cardBg: "#FFFFFF", cardBorder: "#E8D5C0",
+  signBg: "#FFFFFF",
+  signBorder: "#E8D5C0",
+  signShadow: "0 8px 40px rgba(181,114,44,0.12), 0 2px 12px rgba(0,0,0,0.06)",
+  signTextColor: "#B5722C",
+  signTextShadow: "none",
+  signEnColor: "#6B5240",
+  signEnShadow: "none",
+  signHasGlow: false,
+  navBg: "rgba(250,243,235,0.94)",
+  navNameColor: "#B5722C",
+  navNameShadow: "none",
+  ctaBg: "#B5722C",
+  ctaBorder: "none",
+  ctaShadow: "0 6px 24px rgba(181,114,44,0.33)",
+  ctaTextColor: "#FFFFFF",
+  ctaDotColor: "#FFFFFF",
+  footerBg: "#B5722C",
+  footerSignBg: "rgba(255,255,255,0.15)",
+  footerSignBorder: "rgba(255,255,255,0.2)",
+  footerSignShadow: "none",
+  footerSignTextShadow: "none",
+  footerTextColor: "#FFFFFF",
+  footerLinkBg: "rgba(255,255,255,0.15)",
+  footerLinkBorder: "1px solid rgba(255,255,255,0.3)",
+  footerLinkShadow: "none",
+  beanLogoColor: "#B5722C",
+  beanGlow: false,
+  mode: "light",
 };
 
 function useInView(threshold = 0.12) {
@@ -56,7 +115,7 @@ function Reveal({ children, delay = 0, direction = "up", style = {} }) {
   );
 }
 
-function MashrabiyaPattern({ color = C.cream, opacity = 0.08, height = 60 }) {
+function MashrabiyaPattern({ color = "#F0DCC8", opacity = 0.08, height = 60 }) {
   return (
     <div style={{ width: "100%", height, overflow: "hidden", opacity }}>
       <svg viewBox="0 0 480 60" preserveAspectRatio="xMidYMid slice"
@@ -81,7 +140,7 @@ function MashrabiyaPattern({ color = C.cream, opacity = 0.08, height = 60 }) {
   );
 }
 
-function MashrabiyaBand({ color = C.gold }) {
+function MashrabiyaBand({ color = "#D4A043" }) {
   return (
     <div style={{ width: "100%", height: 70, overflow: "hidden", opacity: 0.12 }}>
       <svg viewBox="0 0 600 70" preserveAspectRatio="xMidYMid slice"
@@ -106,7 +165,7 @@ function MashrabiyaBand({ color = C.gold }) {
   );
 }
 
-function CoffeeBeanLogo({ size = 120, color = C.cream }) {
+function CoffeeBeanLogo({ size = 120, color = "#F0DCC8" }) {
   return (
     <svg viewBox="0 0 200 240" width={size} height={size * 1.2}>
       <ellipse cx="100" cy="95" rx="38" ry="52" fill="none" stroke={color} strokeWidth="3.5" transform="rotate(-8 100 95)" />
@@ -122,7 +181,7 @@ function CoffeeBeanLogo({ size = 120, color = C.cream }) {
   );
 }
 
-function Particles() {
+function Particles({ color = "#D4A043" }) {
   const ps = Array.from({ length: 10 }).map(() => ({
     s: 2 + Math.random() * 5, x: 5 + Math.random() * 90,
     d: 10 + Math.random() * 15, dl: Math.random() * 8,
@@ -133,7 +192,7 @@ function Particles() {
       {ps.map((p, i) => (
         <div key={i} style={{
           position: "absolute", width: p.s, height: p.s, borderRadius: "50%",
-          background: C.gold, opacity: p.o, left: `${p.x}%`, bottom: "-5%",
+          background: color, opacity: p.o, left: `${p.x}%`, bottom: "-5%",
           animation: `floatP ${p.d}s ease-in-out ${p.dl}s infinite`,
         }} />
       ))}
@@ -142,7 +201,7 @@ function Particles() {
 }
 
 // ===== STOREFRONT SIGN COMPONENT =====
-function StorefrontSign({ glowing = true }) {
+function StorefrontSign({ theme }) {
   return (
     <div style={{
       position: "relative",
@@ -153,23 +212,19 @@ function StorefrontSign({ glowing = true }) {
       {/* Sign board - mimics the actual illuminated storefront */}
       <div style={{
         width: "100%",
-        background: `linear-gradient(180deg, ${C.blackSoft}ee, ${C.blackWarm}ee, ${C.brownDeep}dd)`,
+        background: theme.signBg,
         borderRadius: 8,
         padding: "36px 24px 28px",
         position: "relative",
         overflow: "hidden",
-        border: `1px solid ${C.copper}22`,
-        boxShadow: glowing ? `
-          0 0 60px ${C.goldGlow}22,
-          0 0 120px ${C.goldGlow}11,
-          0 20px 60px rgba(0,0,0,0.5),
-          inset 0 0 80px ${C.goldGlow}05
-        ` : `0 10px 40px rgba(0,0,0,0.4)`,
+        border: `1px solid ${theme.signBorder}`,
+        boxShadow: theme.signShadow,
+        transition: "background 0.6s, border-color 0.6s, box-shadow 0.6s",
       }}>
         {/* Subtle texture */}
         <div style={{
           position: "absolute", inset: 0, opacity: 0.04,
-          backgroundImage: `radial-gradient(circle, ${C.cream} 0.5px, transparent 0.5px)`,
+          backgroundImage: `radial-gradient(circle, ${theme.cream} 0.5px, transparent 0.5px)`,
           backgroundSize: "12px 12px",
         }} />
 
@@ -182,15 +237,11 @@ function StorefrontSign({ glowing = true }) {
             fontFamily: "'Aref Ruqaa', 'Amiri', serif",
             fontSize: "clamp(52px, 14vw, 80px)",
             fontWeight: 700,
-            color: C.creamLight,
+            color: theme.signTextColor,
             lineHeight: 1.1,
-            textShadow: glowing ? `
-              0 0 20px ${C.goldGlow}66,
-              0 0 40px ${C.goldGlow}33,
-              0 0 80px ${C.goldGlow}18,
-              0 2px 4px rgba(0,0,0,0.3)
-            ` : `0 2px 4px rgba(0,0,0,0.3)`,
+            textShadow: theme.signTextShadow,
             letterSpacing: 2,
+            transition: "color 0.6s, text-shadow 0.6s",
           }}>
             شُبّاك
           </div>
@@ -201,29 +252,30 @@ function StorefrontSign({ glowing = true }) {
           }}>
             <div style={{
               width: 40, height: 1,
-              background: `linear-gradient(90deg, transparent, ${C.goldGlow}55)`,
+              background: `linear-gradient(90deg, transparent, ${theme.goldGlow}55)`,
             }} />
             <div style={{
               width: 6, height: 6,
-              background: C.goldGlow,
+              background: theme.goldGlow,
               transform: "rotate(45deg)",
               opacity: 0.5,
-              boxShadow: glowing ? `0 0 8px ${C.goldGlow}88` : "none",
+              boxShadow: theme.signHasGlow ? `0 0 8px ${theme.goldGlow}88` : "none",
             }} />
             <div style={{
               width: 40, height: 1,
-              background: `linear-gradient(270deg, transparent, ${C.goldGlow}55)`,
+              background: `linear-gradient(270deg, transparent, ${theme.goldGlow}55)`,
             }} />
           </div>
           {/* English name */}
           <div style={{
             fontFamily: "'Amiri', serif",
             fontSize: "clamp(14px, 3.5vw, 20px)",
-            color: C.creamDark,
+            color: theme.signEnColor,
             letterSpacing: 6,
             fontWeight: 400,
-            textShadow: glowing ? `0 0 15px ${C.goldGlow}33` : "none",
+            textShadow: theme.signEnShadow,
             opacity: 0.85,
+            transition: "color 0.6s",
           }}>
             Shubbak Coffee
           </div>
@@ -231,10 +283,10 @@ function StorefrontSign({ glowing = true }) {
       </div>
 
       {/* Subtle light spill below sign (like real backlit signs) */}
-      {glowing && (
+      {theme.signHasGlow && (
         <div style={{
           width: "70%", height: 30,
-          background: `radial-gradient(ellipse, ${C.goldGlow}12 0%, transparent 70%)`,
+          background: `radial-gradient(ellipse, ${theme.goldGlow}12 0%, transparent 70%)`,
           marginTop: -2,
         }} />
       )}
@@ -250,6 +302,8 @@ export default function ShubbakCoffee() {
   const [scrollY, setScrollY] = useState(0);
   const mainRef = useRef(null);
   const [activeMenu, setActiveMenu] = useState(null);
+  const [isDark, setIsDark] = useState(true);
+  const C = isDark ? DARK : LIGHT;
 
   useEffect(() => {
     const t1 = setTimeout(() => setPhase(1), 400);
@@ -299,9 +353,10 @@ export default function ShubbakCoffee() {
 
   return (
     <div style={{
-      height: "100vh", background: C.black,
+      height: "100vh", background: C.bg,
       fontFamily: "'Tajawal', sans-serif",
       direction: "rtl", overflow: "hidden", position: "relative",
+      transition: "background 0.6s",
     }}>
       <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&family=Amiri:wght@400;700&family=Aref+Ruqaa:wght@400;700&family=Reem+Kufi:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
@@ -343,7 +398,7 @@ export default function ShubbakCoffee() {
           100% { opacity: 1; transform: scale(1); filter: brightness(1); }
         }
         *::-webkit-scrollbar { width: 3px; }
-        *::-webkit-scrollbar-track { background: ${C.blackWarm}; }
+        *::-webkit-scrollbar-track { background: ${C.bgSoft}; }
         *::-webkit-scrollbar-thumb { background: ${C.copper}55; border-radius: 3px; }
       `}</style>
 
@@ -357,7 +412,7 @@ export default function ShubbakCoffee() {
       }}>
         <div style={{
           width: "50%", height: "100%",
-          background: `linear-gradient(160deg, ${C.copperDark}, ${C.copper}, ${C.copperLight}44)`,
+          background: `linear-gradient(160deg, ${DARK.copperDark}, ${DARK.copper}, ${DARK.copperLight}44)`,
           boxShadow: "inset -20px 0 60px rgba(0,0,0,0.4)",
           transform: phase >= 2 ? "translateX(-115%)" : "translateX(0)",
           transition: "transform 1.5s cubic-bezier(0.76, 0, 0.24, 1)",
@@ -365,20 +420,20 @@ export default function ShubbakCoffee() {
           position: "relative", overflow: "hidden",
         }}>
           <div style={{ position: "absolute", inset: 0, opacity: 0.05 }}>
-            <MashrabiyaPattern color={C.cream} opacity={1} height="100%" />
+            <MashrabiyaPattern color={DARK.cream} opacity={1} height="100%" />
           </div>
           <div style={{
             position: "absolute", right: 20, top: "50%", transform: "translateY(-50%)",
             width: 5, height: 90, borderRadius: 5,
-            background: `linear-gradient(180deg, ${C.gold}, ${C.goldLight}, ${C.gold})`,
+            background: `linear-gradient(180deg, ${DARK.gold}, ${DARK.goldLight}, ${DARK.gold})`,
             opacity: phase >= 1 ? 0.8 : 0,
             transition: "opacity 0.6s",
-            boxShadow: `0 0 20px ${C.gold}55`,
+            boxShadow: `0 0 20px ${DARK.gold}55`,
           }} />
         </div>
         <div style={{
           width: "50%", height: "100%",
-          background: `linear-gradient(200deg, ${C.copperDark}, ${C.copper}, ${C.copperLight}44)`,
+          background: `linear-gradient(200deg, ${DARK.copperDark}, ${DARK.copper}, ${DARK.copperLight}44)`,
           boxShadow: "inset 20px 0 60px rgba(0,0,0,0.4)",
           transform: phase >= 2 ? "translateX(115%)" : "translateX(0)",
           transition: "transform 1.5s cubic-bezier(0.76, 0, 0.24, 1)",
@@ -386,15 +441,15 @@ export default function ShubbakCoffee() {
           position: "relative", overflow: "hidden",
         }}>
           <div style={{ position: "absolute", inset: 0, opacity: 0.05 }}>
-            <MashrabiyaPattern color={C.cream} opacity={1} height="100%" />
+            <MashrabiyaPattern color={DARK.cream} opacity={1} height="100%" />
           </div>
           <div style={{
             position: "absolute", left: 20, top: "50%", transform: "translateY(-50%)",
             width: 5, height: 90, borderRadius: 5,
-            background: `linear-gradient(180deg, ${C.gold}, ${C.goldLight}, ${C.gold})`,
+            background: `linear-gradient(180deg, ${DARK.gold}, ${DARK.goldLight}, ${DARK.gold})`,
             opacity: phase >= 1 ? 0.8 : 0,
             transition: "opacity 0.6s",
-            boxShadow: `0 0 20px ${C.gold}55`,
+            boxShadow: `0 0 20px ${DARK.gold}55`,
           }} />
         </div>
         {phase >= 1 && phase < 2 && (
@@ -404,7 +459,7 @@ export default function ShubbakCoffee() {
             textAlign: "center",
             animation: "breathe 2.5s ease-in-out infinite",
           }}>
-            <CoffeeBeanLogo size={80} color={C.cream} />
+            <CoffeeBeanLogo size={80} color={DARK.cream} />
           </div>
         )}
       </div>
@@ -424,7 +479,7 @@ export default function ShubbakCoffee() {
           position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
           padding: "10px 16px",
           display: "flex", justifyContent: "space-between", alignItems: "center",
-          background: scrollY > 80 ? `${C.blackWarm}f2` : "transparent",
+          background: scrollY > 80 ? C.navBg : "transparent",
           backdropFilter: scrollY > 80 ? "blur(24px) saturate(1.4)" : "none",
           transition: "all 0.5s",
           borderBottom: scrollY > 80 ? `1px solid ${C.copper}15` : "1px solid transparent",
@@ -432,29 +487,44 @@ export default function ShubbakCoffee() {
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
             <div style={{
               fontFamily: "'Aref Ruqaa', serif",
-              fontSize: 22, color: C.creamLight, fontWeight: 700,
-              textShadow: `0 0 12px ${C.goldGlow}33`,
+              fontSize: 22, color: C.navNameColor, fontWeight: 700,
+              textShadow: C.navNameShadow,
+              transition: "color 0.6s, text-shadow 0.6s",
             }}>شُبّاك</div>
             <div style={{
               opacity: scrollY > 80 ? 0.6 : 0,
-              transition: "opacity 0.3s",
-              fontSize: 11, color: C.creamDark, fontWeight: 300,
+              transition: "opacity 0.3s, color 0.6s",
+              fontSize: 11, color: C.textMid, fontWeight: 300,
               fontFamily: "'Amiri', serif", letterSpacing: 2,
             }}>Shubbak Coffee</div>
           </div>
-          <div style={{
-            display: "flex", gap: 5, alignItems: "center",
-            background: `${C.gold}12`,
-            border: `1px solid ${C.gold}20`,
-            padding: "6px 16px", borderRadius: 50,
-            fontSize: 11, color: C.goldLight, fontWeight: 500,
-          }}>
+          <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
             <div style={{
-              width: 6, height: 6, borderRadius: "50%",
-              background: C.goldLight,
-              animation: "pulseGlow 2s infinite",
-            }} />
-            قريبًا
+              display: "flex", gap: 5, alignItems: "center",
+              background: `${isDark ? C.gold : C.copper}12`,
+              border: `1px solid ${isDark ? C.gold : C.copper}20`,
+              padding: "6px 16px", borderRadius: 50,
+              fontSize: 11, color: isDark ? C.goldLight : C.copper, fontWeight: 500,
+              transition: "background 0.6s, border-color 0.6s, color 0.6s",
+            }}>
+              <div style={{
+                width: 6, height: 6, borderRadius: "50%",
+                background: isDark ? C.goldLight : C.copper,
+                animation: "pulseGlow 2s infinite",
+              }} />
+              قريبًا
+            </div>
+            <button onClick={() => setIsDark(!isDark)} style={{
+              width: 40, height: 40, borderRadius: "50%",
+              background: isDark ? "rgba(240,220,200,0.08)" : "rgba(0,0,0,0.05)",
+              border: `1px solid ${isDark ? "rgba(240,220,200,0.15)" : "rgba(0,0,0,0.1)"}`,
+              fontSize: 18, cursor: "pointer",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              transition: "all 0.4s ease",
+              padding: 0,
+            }}>
+              {isDark ? "☀️" : "🌙"}
+            </button>
           </div>
         </nav>
 
@@ -464,29 +534,34 @@ export default function ShubbakCoffee() {
           display: "flex", flexDirection: "column",
           alignItems: "center", justifyContent: "center",
           position: "relative",
-          background: `
-            radial-gradient(ellipse at 50% 35%, ${C.copperDark}44 0%, transparent 55%),
-            radial-gradient(ellipse at 50% 80%, ${C.brownDark}33 0%, transparent 55%),
-            linear-gradient(180deg, ${C.black}, ${C.blackWarm})
-          `,
+          background: isDark
+            ? `
+              radial-gradient(ellipse at 50% 35%, ${C.copperDark}44 0%, transparent 55%),
+              radial-gradient(ellipse at 50% 80%, ${C.brownDark}33 0%, transparent 55%),
+              linear-gradient(180deg, ${C.black}, ${C.blackWarm})
+            `
+            : `linear-gradient(180deg, #FFF9F2, ${C.bg}, ${C.bgSoft})`,
           padding: "80px 20px 60px",
           overflow: "hidden",
+          transition: "background 0.6s",
         }}>
-          <Particles />
+          {isDark && <Particles color={C.gold} />}
 
           {/* Rotating ring */}
-          <div style={{
-            position: "absolute",
-            width: "min(500px, 95vw)", height: "min(500px, 95vw)",
-            borderRadius: "50%",
-            border: `1px solid ${C.copper}0a`,
-            top: "50%", left: "50%",
-            transform: "translate(-50%, -50%)",
-            animation: "rotSlow 80s linear infinite",
-            zIndex: 0,
-          }}>
-            <div style={{ position: "absolute", top: -4, left: "50%", width: 8, height: 8, borderRadius: "50%", background: C.gold, opacity: 0.2 }} />
-          </div>
+          {isDark && (
+            <div style={{
+              position: "absolute",
+              width: "min(500px, 95vw)", height: "min(500px, 95vw)",
+              borderRadius: "50%",
+              border: `1px solid ${C.copper}0a`,
+              top: "50%", left: "50%",
+              transform: "translate(-50%, -50%)",
+              animation: "rotSlow 80s linear infinite",
+              zIndex: 0,
+            }}>
+              <div style={{ position: "absolute", top: -4, left: "50%", width: 8, height: 8, borderRadius: "50%", background: C.gold, opacity: 0.2 }} />
+            </div>
+          )}
 
           <div style={{ position: "absolute", top: 0, left: 0, right: 0 }}>
             <MashrabiyaPattern color={C.gold} opacity={0.05} />
@@ -499,7 +574,7 @@ export default function ShubbakCoffee() {
               marginBottom: 24,
               position: "relative", zIndex: 2,
             }}>
-              <StorefrontSign glowing={true} />
+              <StorefrontSign theme={C} />
             </div>
           </Reveal>
 
@@ -510,18 +585,20 @@ export default function ShubbakCoffee() {
               position: "relative", zIndex: 2, marginBottom: 20,
             }}>
               <button onClick={() => document.getElementById("menu")?.scrollIntoView({ behavior: "smooth" })} style={{
-                background: `${C.cream}0a`, border: `1px solid ${C.gold}28`,
+                background: `${C.cream}0a`, border: `1px solid ${isDark ? C.gold : C.copper}28`,
                 borderRadius: 50, padding: "10px 28px",
-                color: C.creamDark, fontSize: 14, fontWeight: 500,
+                color: C.textMid, fontSize: 14, fontWeight: 500,
                 cursor: "pointer", backdropFilter: "blur(8px)",
                 fontFamily: "'Tajawal', sans-serif",
+                transition: "background 0.6s, border-color 0.6s, color 0.6s",
               }}>القائمة</button>
               <button onClick={() => document.getElementById("story")?.scrollIntoView({ behavior: "smooth" })} style={{
-                background: `${C.cream}0a`, border: `1px solid ${C.gold}28`,
+                background: `${C.cream}0a`, border: `1px solid ${isDark ? C.gold : C.copper}28`,
                 borderRadius: 50, padding: "10px 28px",
-                color: C.creamDark, fontSize: 14, fontWeight: 500,
+                color: C.textMid, fontSize: 14, fontWeight: 500,
                 cursor: "pointer", backdropFilter: "blur(8px)",
                 fontFamily: "'Tajawal', sans-serif",
+                transition: "background 0.6s, border-color 0.6s, color 0.6s",
               }}>حكايتنا</button>
             </div>
           </Reveal>
@@ -530,10 +607,10 @@ export default function ShubbakCoffee() {
           <Reveal delay={0.6} direction="scale">
             <div style={{
               margin: "0 auto 28px",
-              animation: "signGlow 4s ease-in-out infinite",
+              animation: C.beanGlow ? "signGlow 4s ease-in-out infinite" : "none",
               position: "relative", zIndex: 2,
             }}>
-              <CoffeeBeanLogo size={60} color={`${C.goldLight}cc`} />
+              <CoffeeBeanLogo size={60} color={C.beanLogoColor} />
             </div>
           </Reveal>
 
@@ -542,15 +619,17 @@ export default function ShubbakCoffee() {
             <h1 style={{
               fontFamily: "'Reem Kufi', serif",
               fontSize: "clamp(30px, 6vw, 52px)",
-              color: C.cream, fontWeight: 700,
+              color: C.text, fontWeight: 700,
               textAlign: "center", lineHeight: 1.5,
               margin: "0 0 6px",
               position: "relative", zIndex: 2,
+              transition: "color 0.6s",
             }}>
               <span style={{
                 display: "block", fontWeight: 300, fontSize: "0.55em",
-                color: C.creamWarm, marginBottom: 4,
+                color: C.textLight, marginBottom: 4,
                 fontFamily: "'Aref Ruqaa', serif",
+                transition: "color 0.6s",
               }}>من الشباك ..</span>
               تبدأ الرحلة
             </h1>
@@ -566,10 +645,11 @@ export default function ShubbakCoffee() {
 
           <Reveal delay={1.05}>
             <p style={{
-              color: C.creamDark, fontSize: "clamp(15px, 2.5vw, 18px)",
+              color: C.textMid, fontSize: "clamp(15px, 2.5vw, 18px)",
               fontWeight: 300, maxWidth: 380,
               margin: "0 auto 26px", lineHeight: 2.2,
               textAlign: "center", position: "relative", zIndex: 2,
+              transition: "color 0.6s",
             }}>
               قهوة مختصة «على السريع» بنكهات موزونة ونوتات واضحة
               <br />
@@ -582,21 +662,23 @@ export default function ShubbakCoffee() {
           <Reveal delay={1.2}>
             <div style={{
               display: "inline-flex", alignItems: "center", gap: 14,
-              background: `linear-gradient(135deg, ${C.copper}28, ${C.copperDark}38)`,
-              border: `1px solid ${C.gold}28`,
+              background: C.ctaBg,
+              border: `1px solid ${C.ctaBorder}`,
               borderRadius: 60, padding: "15px 36px",
               position: "relative", zIndex: 2,
-              boxShadow: `0 8px 40px ${C.copper}18`,
+              boxShadow: C.ctaShadow,
               backdropFilter: "blur(10px)",
+              transition: "background 0.6s, border-color 0.6s, box-shadow 0.6s",
             }}>
               <div style={{
                 width: 10, height: 10, borderRadius: "50%",
-                background: C.goldLight,
+                background: C.ctaDotColor,
                 animation: "pulseGlow 2s infinite",
               }} />
               <span style={{
-                color: C.cream, fontSize: 17, fontWeight: 600,
+                color: C.ctaTextColor, fontSize: 17, fontWeight: 600,
                 fontFamily: "'Reem Kufi', sans-serif",
+                transition: "color 0.6s",
               }}>الافتتاح قريبًا جدًا</span>
             </div>
           </Reveal>
@@ -610,8 +692,11 @@ export default function ShubbakCoffee() {
         {/* ━━━━ FEATURES ━━━━ */}
         <section style={{
           padding: "50px 20px",
-          background: `linear-gradient(180deg, ${C.blackWarm}, ${C.blackSoft})`,
+          background: isDark
+            ? `linear-gradient(180deg, ${C.blackWarm}, ${C.blackSoft})`
+            : C.bgSoft,
           position: "relative",
+          transition: "background 0.6s",
         }}>
           <MashrabiyaBand color={C.copper} />
           <div style={{
@@ -628,8 +713,10 @@ export default function ShubbakCoffee() {
               <Reveal key={i} delay={i * 0.12}>
                 <div style={{
                   padding: "32px 20px", height: "100%",
-                  background: `${f.c}08`, border: `1px solid ${f.c}12`,
+                  background: C.cardBg, border: `1px solid ${C.cardBorder}`,
                   borderRadius: 16, textAlign: "center",
+                  boxShadow: isDark ? "none" : "0 2px 12px rgba(0,0,0,0.04)",
+                  transition: "background 0.6s, border-color 0.6s, box-shadow 0.6s",
                 }}>
                   <div style={{ fontSize: 32, marginBottom: 10 }}>{f.ic}</div>
                   <div style={{
@@ -637,7 +724,8 @@ export default function ShubbakCoffee() {
                     color: f.c, fontSize: 16, fontWeight: 600, marginBottom: 5,
                   }}>{f.t}</div>
                   <div style={{
-                    color: C.creamDark, fontSize: 13, fontWeight: 300, lineHeight: 1.7, opacity: 0.65,
+                    color: C.textMid, fontSize: 13, fontWeight: 300, lineHeight: 1.7, opacity: 0.65,
+                    transition: "color 0.6s",
                   }}>{f.d}</div>
                 </div>
               </Reveal>
@@ -648,8 +736,11 @@ export default function ShubbakCoffee() {
         {/* ━━━━ STORY ━━━━ */}
         <section id="story" style={{
           padding: "90px 20px",
-          background: `linear-gradient(180deg, ${C.blackSoft}, ${C.brownDeep}66, ${C.blackSoft})`,
+          background: isDark
+            ? `linear-gradient(180deg, ${C.blackSoft}, ${C.brownDeep}66, ${C.blackSoft})`
+            : `linear-gradient(180deg, ${C.bg}, ${C.bgMid}33, ${C.bg})`,
           position: "relative", overflow: "hidden",
+          transition: "background 0.6s",
         }}>
           <div style={{
             position: "absolute", top: 50, right: 0, width: 50, height: 280, opacity: 0.03, overflow: "hidden",
@@ -668,7 +759,8 @@ export default function ShubbakCoffee() {
                 <h2 style={{
                   fontFamily: "'Aref Ruqaa', serif",
                   fontSize: "clamp(32px, 6vw, 48px)",
-                  color: C.cream, fontWeight: 700, marginBottom: 12,
+                  color: C.text, fontWeight: 700, marginBottom: 12,
+                  transition: "color 0.6s",
                 }}>حكاية شُبّاك</h2>
                 <div style={{
                   width: 50, height: 2,
@@ -691,8 +783,11 @@ export default function ShubbakCoffee() {
                   display: "flex", gap: 18, alignItems: "flex-start",
                   flexWrap: "wrap", justifyContent: "center",
                   marginBottom: 36, padding: "26px 22px",
-                  background: `${s.c}06`, border: `1px solid ${s.c}10`,
+                  background: isDark ? `${s.c}06` : C.cardBg,
+                  border: isDark ? `1px solid ${s.c}10` : `1px solid ${C.cardBorder}`,
                   borderRadius: 20,
+                  boxShadow: isDark ? "none" : "0 2px 12px rgba(0,0,0,0.04)",
+                  transition: "background 0.6s, border-color 0.6s, box-shadow 0.6s",
                 }}>
                   <div style={{
                     width: 52, height: 52, borderRadius: 14,
@@ -704,10 +799,12 @@ export default function ShubbakCoffee() {
                   <div style={{ flex: 1, minWidth: 220 }}>
                     <h3 style={{
                       fontFamily: "'Reem Kufi', serif",
-                      color: C.cream, fontSize: 20, fontWeight: 600, marginBottom: 8,
+                      color: C.text, fontSize: 20, fontWeight: 600, marginBottom: 8,
+                      transition: "color 0.6s",
                     }}>{s.t}</h3>
                     <p style={{
-                      color: C.creamDark, fontSize: 15, lineHeight: 2.2, fontWeight: 300, opacity: 0.75,
+                      color: C.textMid, fontSize: 15, lineHeight: 2.2, fontWeight: 300, opacity: 0.75,
+                      transition: "color 0.6s",
                     }}>{s.p}</p>
                   </div>
                 </div>
@@ -717,9 +814,15 @@ export default function ShubbakCoffee() {
             <Reveal delay={0.3}>
               <div style={{
                 textAlign: "center", padding: "34px 26px",
-                background: `linear-gradient(135deg, ${C.copper}0c, ${C.brownDark}1a)`,
-                border: `1px solid ${C.copper}15`,
+                background: isDark
+                  ? `linear-gradient(135deg, ${C.copper}0c, ${C.brownDark}1a)`
+                  : C.cardBg,
+                border: isDark
+                  ? `1px solid ${C.copper}15`
+                  : `1px solid ${C.cardBorder}`,
                 borderRadius: 22, position: "relative", overflow: "hidden",
+                boxShadow: isDark ? "none" : "0 2px 12px rgba(0,0,0,0.04)",
+                transition: "background 0.6s, border-color 0.6s, box-shadow 0.6s",
               }}>
                 <div style={{ position: "absolute", inset: 0, opacity: 0.025 }}>
                   <MashrabiyaPattern color={C.gold} opacity={1} height="100%" />
@@ -731,8 +834,9 @@ export default function ShubbakCoffee() {
                 <p style={{
                   fontFamily: "'Aref Ruqaa', serif",
                   fontSize: "clamp(18px, 3vw, 28px)",
-                  color: C.cream, lineHeight: 1.8, fontWeight: 400,
+                  color: C.text, lineHeight: 1.8, fontWeight: 400,
                   position: "relative",
+                  transition: "color 0.6s",
                 }}>
                   صباحك يبدأ من الشُبّاك
                   <br />
@@ -749,8 +853,11 @@ export default function ShubbakCoffee() {
         {/* ━━━━ MENU ━━━━ */}
         <section id="menu" style={{
           padding: "90px 20px",
-          background: `linear-gradient(180deg, ${C.blackSoft}, ${C.copperDeep}14, ${C.blackSoft})`,
+          background: isDark
+            ? `linear-gradient(180deg, ${C.blackSoft}, ${C.copperDeep}14, ${C.blackSoft})`
+            : C.bgSoft,
           position: "relative",
+          transition: "background 0.6s",
         }}>
           <div style={{ position: "absolute", top: 0, left: 0, right: 0 }}>
             <MashrabiyaPattern color={C.copper} opacity={0.04} />
@@ -765,7 +872,8 @@ export default function ShubbakCoffee() {
                 <h2 style={{
                   fontFamily: "'Aref Ruqaa', serif",
                   fontSize: "clamp(32px, 6vw, 48px)",
-                  color: C.cream, fontWeight: 700, marginBottom: 12,
+                  color: C.text, fontWeight: 700, marginBottom: 12,
+                  transition: "color 0.6s",
                 }}>
                   شُبّاك قهوة
                 </h2>
@@ -774,7 +882,7 @@ export default function ShubbakCoffee() {
                   background: `linear-gradient(90deg, ${C.copper}, ${C.gold})`,
                   margin: "0 auto 12px", borderRadius: 1,
                 }} />
-                <p style={{ color: C.creamDark, fontSize: 14, fontWeight: 300, opacity: 0.6 }}>
+                <p style={{ color: C.textMid, fontSize: 14, fontWeight: 300, opacity: 0.6, transition: "color 0.6s" }}>
                   قهوة مختصة «على السريع» · مخبوزات طازجة
                 </p>
               </div>
@@ -792,7 +900,7 @@ export default function ShubbakCoffee() {
                       background: activeMenu === i
                         ? `linear-gradient(135deg, ${C.copper}, ${C.copperDark})`
                         : `${C.cream}08`,
-                      color: activeMenu === i ? C.creamLight : C.creamDark,
+                      color: activeMenu === i ? C.creamLight : C.textMid,
                       border: `1px solid ${activeMenu === i ? C.copper : C.cream + '10'}`,
                       borderRadius: 50, padding: "12px 24px",
                       fontSize: 15, fontWeight: activeMenu === i ? 600 : 400,
@@ -823,24 +931,28 @@ export default function ShubbakCoffee() {
                 }}>
                   {cat.items.map((item, idx) => (
                     <div key={idx} style={{
-                      background: `linear-gradient(160deg, ${C.cream}0a, ${C.cream}03)`,
-                      border: `1px solid ${C.cream}0a`,
+                      background: C.cardBg,
+                      border: `1px solid ${C.cardBorder}`,
                       borderRadius: 16, padding: "28px 18px",
                       textAlign: "center",
                       animation: activeMenu === ci ? `slideItem 0.5s ease ${idx * 0.08}s both` : "none",
+                      boxShadow: isDark ? "none" : "0 2px 12px rgba(0,0,0,0.04)",
+                      transition: "background 0.6s, border-color 0.6s, box-shadow 0.6s",
                     }}>
                       <div style={{ fontSize: 32, marginBottom: 10 }}>{item.ic}</div>
                       <div style={{
                         fontFamily: "'Reem Kufi', serif",
-                        color: C.cream, fontSize: 16, fontWeight: 600, marginBottom: 2,
+                        color: C.text, fontSize: 16, fontWeight: 600, marginBottom: 2,
+                        transition: "color 0.6s",
                       }}>{item.n}</div>
                       <div style={{
                         color: C.copperLight, fontSize: 11,
                         letterSpacing: 1, fontWeight: 300, marginBottom: 7,
                       }}>{item.e}</div>
                       <div style={{
-                        color: C.creamDark, fontSize: 13,
+                        color: C.textMid, fontSize: 13,
                         lineHeight: 1.7, fontWeight: 300, opacity: 0.65,
+                        transition: "color 0.6s",
                       }}>{item.d}</div>
                     </div>
                   ))}
@@ -854,9 +966,10 @@ export default function ShubbakCoffee() {
                   textAlign: "center", padding: "32px 20px",
                   background: `${C.copper}05`, border: `1px dashed ${C.copper}12`,
                   borderRadius: 20,
+                  transition: "background 0.6s, border-color 0.6s",
                 }}>
                   <div style={{ fontSize: 32, marginBottom: 10, opacity: 0.4 }}>☕</div>
-                  <p style={{ color: C.creamDark, fontSize: 13, fontWeight: 300, opacity: 0.6 }}>
+                  <p style={{ color: C.textMid, fontSize: 13, fontWeight: 300, opacity: 0.6, transition: "color 0.6s" }}>
                     اختر فئة من الأعلى لاستعراض قائمتنا
                   </p>
                 </div>
@@ -868,10 +981,13 @@ export default function ShubbakCoffee() {
         {/* ━━━━ COMING SOON ━━━━ */}
         <section style={{
           padding: "80px 20px",
-          background: `linear-gradient(180deg, ${C.blackSoft}, ${C.brownDeep}55)`,
+          background: isDark
+            ? `linear-gradient(180deg, ${C.blackSoft}, ${C.brownDeep}55)`
+            : `linear-gradient(180deg, ${C.bg}, ${C.bgSoft})`,
           textAlign: "center", position: "relative", overflow: "hidden",
+          transition: "background 0.6s",
         }}>
-          <Particles />
+          {isDark && <Particles color={C.gold} />}
           <div style={{ position: "absolute", inset: 0, opacity: 0.02 }}>
             <MashrabiyaPattern color={C.gold} opacity={1} height="100%" />
           </div>
@@ -879,15 +995,17 @@ export default function ShubbakCoffee() {
             <div style={{
               fontFamily: "'Aref Ruqaa', serif",
               fontSize: "clamp(30px, 6vw, 46px)",
-              color: C.cream, lineHeight: 1.6, marginBottom: 14,
+              color: C.text, lineHeight: 1.6, marginBottom: 14,
               position: "relative", zIndex: 2,
+              transition: "color 0.6s",
             }}>اقتربت ساعة الشباك</div>
           </Reveal>
           <Reveal delay={0.15}>
             <p style={{
-              color: C.creamDark, fontSize: 16, fontWeight: 300, lineHeight: 2,
+              color: C.textMid, fontSize: 16, fontWeight: 300, lineHeight: 2,
               maxWidth: 380, margin: "0 auto 22px",
               position: "relative", zIndex: 2, opacity: 0.75,
+              transition: "color 0.6s",
             }}>
               قريبًا يفتح شُبّاك أبوابه في حي القصيري
               <br />تابعنا عشان تكون أول من يعرف
@@ -909,7 +1027,8 @@ export default function ShubbakCoffee() {
         {/* ━━━━ FOOTER ━━━━ */}
         <footer style={{
           padding: "50px 20px 34px",
-          background: C.brownDeep, position: "relative",
+          background: C.footerBg, position: "relative",
+          transition: "background 0.6s",
         }}>
           <div style={{ position: "absolute", top: 0, left: 0, right: 0 }}>
             <MashrabiyaBand color={C.copper} />
@@ -922,23 +1041,26 @@ export default function ShubbakCoffee() {
               }}>
                 {/* Mini storefront sign */}
                 <div style={{
-                  background: `${C.blackSoft}cc`,
+                  background: C.footerSignBg,
                   borderRadius: 6, padding: "14px 22px",
-                  border: `1px solid ${C.copper}18`,
+                  border: `1px solid ${C.footerSignBorder}`,
                   textAlign: "center",
-                  boxShadow: `0 0 30px ${C.goldGlow}0c`,
+                  boxShadow: C.footerSignShadow,
+                  transition: "background 0.6s, border-color 0.6s, box-shadow 0.6s",
                 }}>
                   <div style={{
                     fontFamily: "'Aref Ruqaa', serif",
-                    fontSize: 26, color: C.creamLight, fontWeight: 700,
-                    textShadow: `0 0 12px ${C.goldGlow}33`,
+                    fontSize: 26, color: C.footerTextColor, fontWeight: 700,
+                    textShadow: C.footerSignTextShadow,
+                    transition: "color 0.6s, text-shadow 0.6s",
                   }}>شُبّاك</div>
                   <div style={{
-                    fontSize: 8, color: C.creamDark, letterSpacing: 3,
-                    fontFamily: "'Amiri', serif", marginTop: 2,
+                    fontSize: 8, color: C.footerTextColor, letterSpacing: 3,
+                    fontFamily: "'Amiri', serif", marginTop: 2, opacity: 0.7,
+                    transition: "color 0.6s",
                   }}>Shubbak Coffee</div>
                 </div>
-                <CoffeeBeanLogo size={44} color={C.creamDark} />
+                <CoffeeBeanLogo size={44} color={C.footerTextColor} />
               </div>
             </Reveal>
             <Reveal delay={0.1}>
@@ -946,12 +1068,14 @@ export default function ShubbakCoffee() {
                 target="_blank" rel="noopener noreferrer"
                 style={{
                   display: "inline-flex", alignItems: "center", gap: 10,
-                  background: `linear-gradient(135deg, ${C.copper}, ${C.copperDark})`,
-                  color: C.cream, padding: "13px 32px",
+                  background: C.footerLinkBg,
+                  color: C.footerTextColor, padding: "13px 32px",
                   borderRadius: 50, textDecoration: "none",
                   fontSize: 15, fontWeight: 500,
-                  boxShadow: `0 6px 28px ${C.copper}40`,
+                  border: C.footerLinkBorder,
+                  boxShadow: C.footerLinkShadow,
                   marginBottom: 18,
+                  transition: "background 0.6s, color 0.6s, border-color 0.6s, box-shadow 0.6s",
                 }}>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <rect x="2" y="2" width="20" height="20" rx="5" /><circle cx="12" cy="12" r="5" />
@@ -963,7 +1087,8 @@ export default function ShubbakCoffee() {
             <Reveal delay={0.15}>
               <div style={{
                 display: "flex", alignItems: "center", justifyContent: "center", gap: 6,
-                color: C.teal, fontSize: 13, fontWeight: 300, marginBottom: 24,
+                color: isDark ? C.teal : C.footerTextColor, fontSize: 13, fontWeight: 300, marginBottom: 24,
+                transition: "color 0.6s",
               }}>
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" />
@@ -973,10 +1098,10 @@ export default function ShubbakCoffee() {
             </Reveal>
             <div style={{
               width: "100%", height: 1,
-              background: `linear-gradient(90deg, transparent, ${C.cream}10, transparent)`,
+              background: `linear-gradient(90deg, transparent, ${C.footerTextColor}15, transparent)`,
               marginBottom: 18,
             }} />
-            <div style={{ color: C.creamDark, fontSize: 11, opacity: 0.25, fontWeight: 300 }}>
+            <div style={{ color: C.footerTextColor, fontSize: 11, opacity: 0.25, fontWeight: 300, transition: "color 0.6s" }}>
               شُبّاك كوفي © ٢٠٢٦ · جميع الحقوق محفوظة
             </div>
           </div>
