@@ -8,7 +8,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "start": "vite build && vite preview --host 0.0.0.0 --port 80"
+    "start": "vite build"
   },
   "dependencies": {
     "react": "^18.3.1",
