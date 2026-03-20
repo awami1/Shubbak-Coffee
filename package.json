@@ -8,7 +8,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "start": "vite build && serve dist -s -l 80"
+    "start": "vite build && serve dist -s -l tcp://0.0.0.0:80"
   },
   "dependencies": {
     "react": "^18.3.1",
